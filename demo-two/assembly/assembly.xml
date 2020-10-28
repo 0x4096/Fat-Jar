@@ -1,0 +1,51 @@
+<assembly>
+	<id>physical</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+
+	<fileSets>
+
+		<!-- 把项目的脚本文件目录（ assembly/bin ）中的启动脚本，打包进压缩文件根目录 -->
+		<fileSet>
+			<directory>${project.basedir}/assembly/bin</directory>
+			<outputDirectory>/</outputDirectory>
+			<fileMode>0755</fileMode>
+			<includes>
+				<include>*.*</include>
+			</includes>
+		</fileSet>
+
+
+		<!-- 把项目的配置文件，打包进压缩文件conf目录 -->
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources</directory>
+			<outputDirectory>config</outputDirectory>
+			<fileMode>0644</fileMode>
+			<includes>
+				<include>*.xml</include>
+				<include>*.properties</include>
+				<include>*.json</include>
+				<include>static/**</include>
+			</includes>
+		</fileSet>
+
+		<!-- 将第三方依赖打包到lib目录中 -->
+		<fileSet>
+			<directory>${basedir}/target/lib</directory>
+			<outputDirectory>lib</outputDirectory>
+			<fileMode>0755</fileMode>
+		</fileSet>
+
+		<!-- 将项目启动jar打包到boot目录中 -->
+		<fileSet>
+			<directory>${basedir}/target</directory>
+			<outputDirectory>/</outputDirectory>
+			<fileMode>0755</fileMode>
+			<includes>
+				<include>${project.build.finalName}.jar</include>
+			</includes>
+		</fileSet>
+
+	</fileSets>
+</assembly>
